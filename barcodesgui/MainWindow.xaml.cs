@@ -51,6 +51,10 @@ namespace barcodesgui
         {
             string path = getPath();
             string header = "room_num,printer_id,page_count";
+            if (!Directory.Exists(@"H:/printercount/"))
+            {
+                Directory.CreateDirectory(@"H:/printercount/");
+            }
             if (!File.Exists(path))
             {
                 File.Create(path).Close();
@@ -82,9 +86,8 @@ namespace barcodesgui
 
         string getPath()
         {
-            string path = @"H:/";
-            string semester = "printercount_";
-            semester += DateTime.Now.Month switch
+            string path = @"H:/printercount/";
+            string semester = DateTime.Now.Month switch
             {
                 <= 6 => "Spring",
                 _ => "Fall"
