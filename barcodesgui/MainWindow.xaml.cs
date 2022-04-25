@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Threading;
 using System.Windows;
-using System.Windows.Input;
 namespace barcodesgui
 {
     /// <summary>
@@ -13,14 +11,15 @@ namespace barcodesgui
     /// </summary>
     public partial class MainWindow : Window
     {
-        public record PrinterInfo(int room, int printer, [Optional]int? pages)
+        public record PrinterInfo(int room, int printer, [Optional] int? pages)
         {
             public override string ToString()
             {
                 if (pages is null)
                 {
                     return $"Room {room} | Printer {printer} | Pages not yet entered";
-                } else
+                }
+                else
                 {
                     return $"Room {room} | Printer {printer} | {pages} pages printed";
                 }
@@ -39,7 +38,7 @@ namespace barcodesgui
             {
                 PrinterInfo pi = new PrinterInfo(int.Parse(txtRoomNum.Text), int.Parse(txtPrinterNum.Text), int.Parse(txtPageCount.Text));
                 Export(pi);
-            } 
+            }
             else
             {
                 MessageBox.Show("Please enter a page count!");
